@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block nav %}ML Analytics{% endblock %}
+{% block title %}ML Analytics{% endblock %}
+{% block content %}
+<br/>
+<div class="text-center"><h4>Welcome to Machine Learning Analytic</h4></div>
+<hr/>
+
+
+<!-- Upload file html -->
+<div class="container">
+    <div class="row">
+        <!-- uploading new csv -->
+        <div class="col border-right">
+            <h5>Upload CSV</h5>
+            <form  method="post" enctype="multipart/form-data" id="upload" >
+                {% csrf_token %}
+                <label for="id_upload_file_name">Dataset name: </label>
+                <input type="text" name="file_name" required id="id_upload_file_name"/><br><br>
+                <label for="id_document">File: </label>
+                <input type="file" name="file_content" required id="id_document"><br><br>
+                <button type="submit" class="btn btn-primary" name='upload'>Upload file</button>
+                <b>{{ status }}</b>
+            </form>
+        </div>
+    </div>
+</div>
+<hr/>
+
+{% include 'analytic_template.html' %}
+
+{% if result_plot %}
+<div class="text-center">
+    <center>
+    <h5>result</h5>
+    {{ result_plot | safe }}
+    </center>
+</div>
+{% endif %}
+
+{% endblock %}
+
+

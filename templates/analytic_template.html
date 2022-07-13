@@ -1,0 +1,37 @@
+<!-- Run Analytic html -->
+<form method="post" enctype="multipart/form-data" id='analytic'>
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <!-- select dataset to work on -->
+            <div class="col">
+            <h5>Select Dataset</h5>
+            {% if files|length < 1 %}
+                <p class="text-info">Please import csv</p>
+            {% else %}
+            {% for file_name in files %}
+            <div class="myradio">
+                <label for="file_name{{ forloop.counter }}"><input id="file_name{{ forloop.counter }}" name="file_name" type="radio" value="{{ file_name }}" required> {{ file_name }}</label>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    
+        <div class="col">
+            <h5>Select Algorithm</h5>
+            {% if algorithms|length < 1 %}
+                <p class="text-info">Contact the admin to upload algorithms</p>
+            {% else %}
+            {% for algorithm in algorithms %}
+            <div class="myradio">
+                <label for="{{ algorithm }}"><input id="{{ algorithm }}" name="algorithm" type="radio" value="{{ algorithm }}" required> {{ algorithm }}</label>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    
+        </div>
+        <button type="submit" class="btn btn-primary" id='run_analytic' name='analytic'> Run Analytic</button>
+        </div>
+    </form>
+    <hr/>
